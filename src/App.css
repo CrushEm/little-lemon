@@ -1,3 +1,61 @@
+:root {
+  --primary: #495e57;
+  --secondary: #ee9972;
+  --highlight: #f4ce14;
+
+  --text: #fff;
+  --navText: #000;
+  --btnText: #fff;
+  --footer: #FF86AC;
+  
+  --font-primary: "Roboto", sans-serif;
+  --font-secondary: "Geologica", sans-serif;
+  
+  --primary-trans-80: #495e57cc;
+  --primary-trans-75: #495e57BF;
+  --primary-trans-50: #495e5780;
+  --primary-trans-25: #495e5740;
+  
+  --secondary-trans-80: #ee9972cc;
+  --secondary-trans-75: #ee9972BF;
+  --secondary-trans-50: #ee997280;
+  --secondary-trans-25: #ee997240;
+  
+  --primary-lighten-80: #f5d5d8;
+  --primary-lighten-75: #f5b8bc;
+  --primary-lighten-50: #f3949a;
+  --primary-lighten-25: #f17078;
+  
+  --secondary-lighten-80: #bbd0d6;
+  --secondary-lighten-75: #7ba4b1;
+  --secondary-lighten-50: #587e8a;
+  --secondary-lighten-25: #476c77;
+  
+  --primary-darken-80: #3d080b;
+  --primary-darken-75: #68161b;
+  --primary-darken-50: #a02931;
+  --primary-darken-25: #c43942;
+  
+  --secondary-darken-80: #06242e;
+  --secondary-darken-75: #0b313d;
+  --secondary-darken-50: #123c49;
+  --secondary-darken-25: #204f5e;
+  
+  --white: #edefee;
+  --black: #000000;
+  --btn-radius: 3px;
+  --radius: 50px;
+  --transition: all 0.3s ease;
+  --transition-main: 1s all cubic-bezier(0.7, 0, 0.1, 1);
+  --transition-text: 1s all ease-in-out;
+  --transition-fast: .1s all ease-in-out;
+  
+  --gray: #999;
+  --gray-light: #ccc;
+  --gray-dark: #333333;
+  --gray-darker: #222222;
+  } 
+
 .App {
   text-align: center;
 }
@@ -14,7 +72,7 @@
 } 
 
 .App-header {
-  background-color: #282c34;
+  background-color: var(--white);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,6 +80,17 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+.App-header img:nth-child(1){
+  width: 50vw;
+  max-width: 250px;
+  padding-bottom: 15px;
+}
+.App-header img:nth-child(2){
+  width: 80vw;
+  max-width: 440px;
+  margin: 0 20px;
+  margin-bottom: 40px;
 }
 
 .App-link {
@@ -35,4 +104,21 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+button {
+  width: 80%;
+  max-width: 440px;
+  color: white;
+  border-radius: var(--radius);
+  border: unset;
+  font-size: 25px;
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
+button.secondary{
+  background-image: linear-gradient(to left, var(--secondary), var(--highlight) );
+}
+button.primary{
+  background-image: linear-gradient(to left, var(--primary), var(--gray-dark) );
 }
