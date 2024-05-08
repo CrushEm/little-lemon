@@ -45,7 +45,7 @@
   --black: #000000;
   --btn-radius: 3px;
   --radius: 50px;
-  --transition: all 0.3s ease;
+  --transition: all 0.73s ease;
   --transition-main: 1s all cubic-bezier(0.7, 0, 0.1, 1);
   --transition-text: 1s all ease-in-out;
   --transition-fast: .1s all ease-in-out;
@@ -115,10 +115,27 @@ button {
   font-size: 25px;
   padding: 10px 0;
   margin-bottom: 20px;
+  font-weight: bolder;
+  transition: all 0.73s ease;
 }
 button.secondary{
   background-image: linear-gradient(to left, var(--secondary), var(--highlight) );
 }
+button.secondary:hover{
+  background-image: linear-gradient(to right, var(--secondary), var(--highlight) );
+}
+button.secondary:active{
+  background: var(--highlight);
+  color: var(--primary);
+}
+
 button.primary{
   background-image: linear-gradient(to left, var(--primary), var(--gray-dark) );
+}
+button.primary:hover {
+  background-image: linear-gradient(to right, var(--primary), var(--gray-dark) );
+}
+button.primary:active{
+  background: var(--primary);
+  color: var(--secondary);
 }

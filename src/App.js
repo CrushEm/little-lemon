@@ -10,9 +10,11 @@ function App() {
       <header className="App-header">
         <img src={logo} className="" alt="logo" />
         <img src={feature} className="" alt="logo" />
+
         <Button className="primary">View Menu</Button>
         <Button className="secondary">Book Seating</Button>
         <Button className="primary">About Us</Button>
+
       </header>
     </div>
   );
