@@ -1,22 +1,26 @@
-import logo from './assets/logo.png';
-import feature from './assets/feature.jpg'
-import './App.css';
-import Button from './components/button';
-import Header from './components/header';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LanderScreen from './screens/Lander.js';
+import MenuScreen from './screens/Menu.js';
+// import BookingScreen from './screens/BookingScreen';
+// import AboutUsScreen from './screens/AboutUsScreen';
+// import CheckoutScreen from './screens/CheckoutScreen';
+// import ConfirmScreen from './screens/ConfirmScreen';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="" alt="logo" />
-        <img src={feature} className="" alt="logo" />
 
-        <Button className="primary">View Menu</Button>
-        <Button className="secondary">Book Seating</Button>
-        <Button className="primary">About Us</Button>
+    <Router>
+      <Routes>
+        {/* <Route path="/confirm" element={<ConfirmScreen />} />
+        <Route path="/checkout" element={<CheckoutScreen />} />
+        <Route path="/about-us" element={<AboutUsScreen />} />
+        <Route path="/booking" element={<BookingScreen />} />*/}
+        <Route path="/menu" element={<MenuScreen />} /> 
+        <Route path="/" element={<LanderScreen />} />
+      </Routes>
+    </Router>
 
-      </header>
-    </div>
   );
 }
 
