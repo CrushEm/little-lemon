@@ -5,13 +5,13 @@ import logo from '../assets/logo.png';
 import feature from '../assets/feature.jpg'
 import '../App.css';
 
-import HeaderWithBackButton from '../components/HeadWithBackButon';
+import BackHeader from '../components/backHeader.js';
 
 
 const MenuScreen = ({ navigation }) => {
   return (
     <div className="App">
-      <HeaderWithBackButton title="Menu"></HeaderWithBackButton>
+      <BackHeader title="Menu"></BackHeader>
     </div>
   );
 };

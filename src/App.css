@@ -139,3 +139,35 @@ button.primary:active{
   background: var(--primary);
   color: var(--secondary);
 }
+button.icon{
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: unset;
+  color: var(--primary);
+  background: var(--white);
+}
+.back-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding: 20px;
+    height: 15vh;
+    background-image: url('./assets/feature.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.back-header h1{
+  color: var(--white);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.back-header div.overlay{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20vh;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}

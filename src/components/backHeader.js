@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom'; // Assuming you're using React Router f
 import Button from './button';
 import { useNavigate} from 'react-router-dom';
 
-const HeaderWithBackButton = ({ title }) => {
+const BackHeader = ({ title }) => {
 
   return (
-    <div className="">
+    <div className="back-header">
       <Button to="back">{title}</Button>
-      <h1 className="">{title}</h1>
+      <h1>{title}</h1>
+      <div className="overlay"></div>
     </div>
   );
 };
 
-export default HeaderWithBackButton;
+export default BackHeader;
