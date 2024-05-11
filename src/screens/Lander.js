@@ -16,7 +16,7 @@ const LanderScreen = ({ navigation }) => {
         <img src={feature} className="" alt="feature" />
 
         <Button className="primary" to="Menu">View Menu</Button>
-        <Button className="secondary">Book Seating</Button>
+        <Button className="secondary" to="Booking" >Book Seating</Button>
         <Button className="primary">About Us</Button>
 
         </header>

@@ -3,44 +3,19 @@
   --secondary: #ee9972;
   --highlight: #f4ce14;
 
-  --text: #fff;
-  --navText: #000;
-  --btnText: #fff;
-  --footer: #FF86AC;
-  
   --font-primary: "Roboto", sans-serif;
   --font-secondary: "Geologica", sans-serif;
-  
+
   --primary-trans-80: #495e57cc;
-  --primary-trans-75: #495e57BF;
+  --primary-trans-75: #495e57bf;
   --primary-trans-50: #495e5780;
   --primary-trans-25: #495e5740;
-  
+
   --secondary-trans-80: #ee9972cc;
-  --secondary-trans-75: #ee9972BF;
+  --secondary-trans-75: #ee9972bf;
   --secondary-trans-50: #ee997280;
   --secondary-trans-25: #ee997240;
-  
-  --primary-lighten-80: #f5d5d8;
-  --primary-lighten-75: #f5b8bc;
-  --primary-lighten-50: #f3949a;
-  --primary-lighten-25: #f17078;
-  
-  --secondary-lighten-80: #bbd0d6;
-  --secondary-lighten-75: #7ba4b1;
-  --secondary-lighten-50: #587e8a;
-  --secondary-lighten-25: #476c77;
-  
-  --primary-darken-80: #3d080b;
-  --primary-darken-75: #68161b;
-  --primary-darken-50: #a02931;
-  --primary-darken-25: #c43942;
-  
-  --secondary-darken-80: #06242e;
-  --secondary-darken-75: #0b313d;
-  --secondary-darken-50: #123c49;
-  --secondary-darken-25: #204f5e;
-  
+
   --white: #edefee;
   --black: #000000;
   --btn-radius: 3px;
@@ -48,16 +23,20 @@
   --transition: all 0.73s ease;
   --transition-main: 1s all cubic-bezier(0.7, 0, 0.1, 1);
   --transition-text: 1s all ease-in-out;
-  --transition-fast: .1s all ease-in-out;
-  
+  --transition-fast: 0.1s all ease-in-out;
+
   --gray: #999;
   --gray-light: #ccc;
   --gray-dark: #333333;
   --gray-darker: #222222;
-  } 
+}
 
 .App {
   text-align: center;
+}
+.App-Contrainer {
+  max-width: 880px;
+  margin: 0 auto;
 }
 
 .App-logo {
@@ -69,7 +48,7 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-} 
+}
 
 .App-header {
   background-color: var(--white);
@@ -81,12 +60,12 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-.App-header img:nth-child(1){
+.App-header img:nth-child(1) {
   width: 50vw;
   max-width: 250px;
   padding-bottom: 15px;
 }
-.App-header img:nth-child(2){
+.App-header img:nth-child(2) {
   width: 80vw;
   max-width: 440px;
   margin: 0 20px;
@@ -96,7 +75,12 @@
 .App-link {
   color: #61dafb;
 }
-
+.App-contain {
+  position: relative;
+  background-color: var(--white);
+  height: 100vh;
+  overflow: hidden;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -118,56 +102,108 @@ button {
   font-weight: bolder;
   transition: all 0.73s ease;
 }
-button.secondary{
-  background-image: linear-gradient(to left, var(--secondary), var(--highlight) );
+button.secondary {
+  background-image: linear-gradient(
+    to left,
+    var(--secondary),
+    var(--highlight)
+  );
 }
-button.secondary:hover{
-  background-image: linear-gradient(to right, var(--secondary), var(--highlight) );
+button.secondary:hover {
+  background-image: linear-gradient(
+    to right,
+    var(--secondary),
+    var(--highlight)
+  );
 }
-button.secondary:active{
+button.secondary:active {
   background: var(--highlight);
   color: var(--primary);
 }
 
-button.primary{
-  background-image: linear-gradient(to left, var(--primary), var(--gray-dark) );
+button.primary {
+  background-image: linear-gradient(to left, var(--primary), var(--gray-dark));
 }
 button.primary:hover {
-  background-image: linear-gradient(to right, var(--primary), var(--gray-dark) );
+  background-image: linear-gradient(to right, var(--primary), var(--gray-dark));
 }
-button.primary:active{
+button.primary:active {
   background: var(--primary);
   color: var(--secondary);
 }
-button.icon{
-  width: 3rem;
-  height: 3rem;
+button.icon {
+  width: 2.5rem;
+  height: 2.5rem;
   margin-bottom: unset;
   color: var(--primary);
   background: var(--white);
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
-.back-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    padding: 20px;
-    height: 15vh;
-    background-image: url('./assets/feature.jpg');
-    background-size: cover;
-    background-position: center;
+.back-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  padding: 30px 20px;
+  height: 15vh;
+  z-index: 2;
 }
 
-.back-header h1{
+.back-header h1 {
   color: var(--white);
   font-weight: 600;
   margin-bottom: 16px;
 }
-.back-header div.overlay{
-  content: "";
+
+div.overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 20vh;
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  background-image: url("./assets/feature2.jpg");
+  background-size: cover;
+  background-position: center;
+}
+div.overlay:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.menu-item{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr;
+}
+.menu-item img{
+  width: clamp(24vw, 100%, 40vw);
+  padding-left: 10px;
+}
+.menu-details{
+  margin-left: 20px;
+}
+
+.flex-start{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.flex-center{
+  display: flex;
+  justify-content: center;
+}
+FormControl input {
+ width: 100%;
 }
