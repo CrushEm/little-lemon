@@ -162,7 +162,7 @@ div.overlay {
   top: 0;
   left: 0;
   width: 100%;
-  height: 20vh;
+  height: 15vh;
   background-image: url("./assets/feature2.jpg");
   background-size: cover;
   background-position: center;
@@ -204,6 +204,10 @@ div.overlay:before {
   display: flex;
   justify-content: center;
 }
-FormControl input {
- width: 100%;
+
+.table-input{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
 }

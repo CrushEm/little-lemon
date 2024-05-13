@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LanderScreen from './screens/Lander.js';
 import MenuScreen from './screens/Menu.js';
-import BookingScreen from './screens/Booking.js';
+import {BookingScreen} from './screens/Booking.js';
 // import AboutUsScreen from './screens/AboutUsScreen';
 // import CheckoutScreen from './screens/CheckoutScreen';
 // import ConfirmScreen from './screens/ConfirmScreen';
