@@ -60,6 +60,8 @@ const timesReducer = (state, action) => {
             const selectedDate = new Date(action.payload);
             const dayOfWeek = selectedDate.getDay(); // 0 (Sunday) to 6 (Saturday)
 
+            console.log(selectedDate, dayOfWeek); 
+
             let updatedTimes = [];
 
             // Check if the selected day is a weekend (Saturday or Sunday)
@@ -85,12 +87,11 @@ const timesReducer = (state, action) => {
     }
 };
 
-
-
 const BookingScreen = ({ navigation }) => {
 
     const [timesList, dispatch] = useReducer(timesReducer, availableTimes);
     const [selectedTime, setSelectedTime] = useState(getCurrentTime());
+    const [selectedDate, setSelectedDate] = useState(new Date());
     // const [selectedTime, dispatch] = useReducer(timesReducer, availableTimes);
 
 
@@ -136,9 +137,16 @@ const BookingScreen = ({ navigation }) => {
     }, [response]);
 
     useEffect(() => {
-        console.log("Update Times ", selectedTime );
-        dispatch({ type: 'UPDATE_TIMES', payload: selectedTime });
+        //console.log("Update Times ", selectedTime );
+       // dispatch({ type: 'UPDATE_TIMES', payload: selectedTime });
     }, [selectedTime]);
+
+    useEffect(() => {
+        // Dispatch action to update times list based on selected date
+        console.log("Update Times", selectedDate); 
+        dispatch({ type: 'UPDATE_TIMES', payload: selectedDate });
+    }, [selectedDate]);
+
 
     return (
         <BookingContext.Provider value={{ values, errors, touched, getFieldProps, handleSubmit }}>
@@ -161,12 +169,15 @@ const BookingScreen = ({ navigation }) => {
                                 </FormControl>
                                 <FormControl >
                                     <FormLabel htmlFor="bookingDateTime">Date and Time</FormLabel>
-                                    <Input placeholder='Select Date and Time' size='md' type='date' min="2024-04-01" />
+                                    <Input placeholder='Select Date and Time' size='md' type='date' min="2024-04-01"
+                                                                    onChange={(e) => setSelectedDate(new Date(e.target.value))}
+                                                                    value={selectedDate.toISOString().substr(0, 10)}
+                                                                     />
                                     <FormErrorMessage>{errors.firstName}</FormErrorMessage>
                                 </FormControl>
                             </div>
                             <div className="timeSelect">
-                                <SelectTime availableTimes={timesList} setSelectedTime={setSelectedTime} ></SelectTime>
+                                <SelectTime  availableTimes={timesList} setSelectedTime={setSelectedTime} ></SelectTime>
                             </div>
                             <FormControl isInvalid={errors.firstName && touched.firstName} >
                                 <FormLabel htmlFor="firstName">Name</FormLabel>

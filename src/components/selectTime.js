@@ -14,12 +14,14 @@ const SelectTime = ({ setSelectedTime, availableTimes }) => {
     return (
         <FormControl>
             <FormLabel>Select Time</FormLabel>
-            <VStack spacing={4} alignItems="flex-start">
+            <VStack spacing={4} alignItems="flex-start" >
+                <div className="timesContainer">
                 {availableTimes.map((time, index) => (
                     <Button key={index} onClick={() => handleTimeClick(time)}>
                         {time}
                     </Button>
                 ))}
+                </div>
             </VStack>
         </FormControl>
     );

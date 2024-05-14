@@ -211,3 +211,8 @@ div.overlay:before {
   width: 100%;
   gap: 20px;
 }
+.timesContainer{
+  display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
