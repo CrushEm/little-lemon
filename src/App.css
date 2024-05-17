@@ -94,6 +94,7 @@ button {
   width: 80%;
   max-width: 440px;
   color: white;
+  background-color: var(--gray-dark);
   border-radius: var(--radius);
   border: unset;
   font-size: 25px;
@@ -141,6 +142,21 @@ button.icon {
   align-items: center;
   display: flex;
 }
+
+
+button.inactive {
+  background-image: linear-gradient(
+    to left,
+    var(--white),
+    var(--gray)
+  );
+  /* border: var(--gray-dark);
+  border-width: 1px;
+  border-style: solid; */
+}
+
+
+
 .back-header {
   position: relative;
   display: flex;

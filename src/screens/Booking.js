@@ -60,7 +60,7 @@ const timesReducer = (state, action) => {
             const selectedDate = new Date(action.payload);
             const dayOfWeek = selectedDate.getDay(); // 0 (Sunday) to 6 (Saturday)
 
-            console.log(selectedDate, dayOfWeek); 
+            console.log(selectedDate, dayOfWeek);
 
             let updatedTimes = [];
 
@@ -68,12 +68,12 @@ const timesReducer = (state, action) => {
             if (dayOfWeek === 0 || dayOfWeek === 6) {
                 // Weekend: include times from 10 AM to 2 PM
                 for (let i = 10; i <= 14; i++) {
-                    updatedTimes.push(`${i < 12 ? i : i - 12}:00 ${i < 12 ? 'AM' : 'PM'}`);
+                    updatedTimes.push(`${i <= 12 ? i : i - 12}:00 ${i < 12 ? 'AM' : 'PM'}`);
                 }
             } else {
                 // Weekday: include times from 10 AM to 2 PM and 5 PM to 8 PM
                 for (let i = 10; i <= 14; i++) {
-                    updatedTimes.push(`${i < 12 ? i : i - 12}:00 ${i < 12 ? 'AM' : 'PM'}`);
+                    updatedTimes.push(`${i <= 12 ? i : i - 12}:00 ${i < 12 ? 'AM' : 'PM'}`);
                 }
                 for (let i = 17; i <= 20; i++) {
                     updatedTimes.push(`${i < 12 ? i : i - 12}:00 ${i < 12 ? 'AM' : 'PM'}`);
@@ -92,6 +92,7 @@ const BookingScreen = ({ navigation }) => {
     const [timesList, dispatch] = useReducer(timesReducer, availableTimes);
     const [selectedTime, setSelectedTime] = useState(getCurrentTime());
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [numGuest, setNumGuest] = useState('2');
     // const [selectedTime, dispatch] = useReducer(timesReducer, availableTimes);
 
 
@@ -111,11 +112,13 @@ const BookingScreen = ({ navigation }) => {
             email: '',
             type: '',
             comment: '',
+            numGuest: '',
         },
         onSubmit: (values) => {
             submit("", values)
         },
         validationSchema: Yup.object().shape({
+            numGuest: Yup.number().required('Number of guest?'),
             firstName: Yup.string().required('First name is required'),
             email: Yup.string().email('Invalid email address').required('Email is required'),
             type: Yup.string().required('A type is required'),
@@ -137,29 +140,46 @@ const BookingScreen = ({ navigation }) => {
     }, [response]);
 
     useEffect(() => {
-        //console.log("Update Times ", selectedTime );
-       // dispatch({ type: 'UPDATE_TIMES', payload: selectedTime });
-    }, [selectedTime]);
-
-    useEffect(() => {
         // Dispatch action to update times list based on selected date
-        console.log("Update Times", selectedDate); 
-        dispatch({ type: 'UPDATE_TIMES', payload: selectedDate });
+        console.log("Update Times", selectedDate);
+        //dispatch({ type: 'UPDATE_TIMES', payload: selectedDate });
     }, [selectedDate]);
 
+    useEffect(() => {
+        console.log(numGuest);
+        //dispatch({ type: 'UPDATE_TIMES', payload: selectedTime });
+    }, [numGuest]);
+
+    useEffect(() => {
+        console.log(selectedTime);
+        //dispatch({ type: 'UPDATE_TIMES', payload: selectedTime });
+    }, [selectedTime]);
+
+    const handleNumGuestChange = (valueString) => {
+        // Log the value change
+        console.log('Number of guests changed:', valueString);
+        // Update the state with the new value
+        setNumGuest(valueString);
+    };
 
     return (
-        <BookingContext.Provider value={{ values, errors, touched, getFieldProps, handleSubmit }}>
+        <BookingContext.Provider value={{ values, errors, touched, getFieldProps, handleSubmit, numGuest, selectedTime, selectedDate }}>
             <BackHeader title="Booking"></BackHeader>
             <VStack className="flex-center" alignItems="center" >
                 <Box p={6} rounded="md" w="100%">
                     <form onSubmit={handleSubmit}>
                         <VStack className="flex-start" spacing={4}>
-                            <div class="table-input">
+                            <div className="table-input">
                                 <FormControl isInvalid={errors.type && touched.type}>
-                                    <FormLabel htmlFor="phone">Number of Guest</FormLabel>
-                                    <NumberInput>
-                                        <NumberInputField />
+                                    <FormLabel htmlFor="numGuest">Number of Guest</FormLabel>
+                                    <NumberInput
+                                        id="numGuest"
+                                        name="numGuest"
+                                        min={1} max={20}
+                                        onChange={handleNumGuestChange}
+                                        value={numGuest}
+                                    >
+                                        <NumberInputField  />
                                         <NumberInputStepper>
                                             <NumberIncrementStepper />
                                             <NumberDecrementStepper />
@@ -170,14 +190,14 @@ const BookingScreen = ({ navigation }) => {
                                 <FormControl >
                                     <FormLabel htmlFor="bookingDateTime">Date and Time</FormLabel>
                                     <Input placeholder='Select Date and Time' size='md' type='date' min="2024-04-01"
-                                                                    onChange={(e) => setSelectedDate(new Date(e.target.value))}
-                                                                    value={selectedDate.toISOString().substr(0, 10)}
-                                                                     />
+                                        onChange={(e) => setSelectedDate(new Date(e.target.value))}
+                                        value={selectedDate.toISOString().substr(0, 10)}
+                                    />
                                     <FormErrorMessage>{errors.firstName}</FormErrorMessage>
                                 </FormControl>
                             </div>
                             <div className="timeSelect">
-                                <SelectTime  availableTimes={timesList} setSelectedTime={setSelectedTime} ></SelectTime>
+                                <SelectTime availableTimes={timesList} setSelectedTime={setSelectedTime} ></SelectTime>
                             </div>
                             <FormControl isInvalid={errors.firstName && touched.firstName} >
                                 <FormLabel htmlFor="firstName">Name</FormLabel>
@@ -209,11 +229,11 @@ const BookingScreen = ({ navigation }) => {
                                 />
                                 <FormErrorMessage>{errors.type}</FormErrorMessage>
                             </FormControl>
-                            <Button type="submit" width="full" isLoading={isLoading}>
+                            className="secondary"
+                        </VStack>
+                        <Button className="inactive" type="submit" width="full" isLoading={isLoading} to="Menu">
                                 Submit
                             </Button>
-
-                        </VStack>
                     </form>
                 </Box>
             </VStack>
