@@ -7,12 +7,12 @@ const Button = ({ to, children, className }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
+    console.log(to); 
     if(to === 'back'){
       navigate(-1);
     }else{
-      navigate(to);
+      navigate('/'+to);
     }
-
   };
 
   return (

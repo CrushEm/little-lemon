@@ -100,19 +100,15 @@ const BookingScreen = ({ navigation }) => {
     //const { onOpen } = useAlertContext();
 
     const {
-        values,
         errors,
         touched,
         getFieldProps,
-        handleSubmit,
-        //resetForm
     } = useFormik({
         initialValues: {
             firstName: '',
             email: '',
             type: '',
             comment: '',
-            numGuest: '',
         },
         onSubmit: (values) => {
             submit("", values)
@@ -163,11 +159,11 @@ const BookingScreen = ({ navigation }) => {
     };
 
     return (
-        <BookingContext.Provider value={{ values, errors, touched, getFieldProps, handleSubmit, numGuest, selectedTime, selectedDate }}>
+        <BookingContext.Provider value={{ numGuest, selectedTime, selectedDate }}>
             <BackHeader title="Booking"></BackHeader>
             <VStack className="flex-center" alignItems="center" >
                 <Box p={6} rounded="md" w="100%">
-                    <form onSubmit={handleSubmit}>
+                    <form >
                         <VStack className="flex-start" spacing={4}>
                             <div className="table-input">
                                 <FormControl isInvalid={errors.type && touched.type}>
@@ -179,7 +175,7 @@ const BookingScreen = ({ navigation }) => {
                                         onChange={handleNumGuestChange}
                                         value={numGuest}
                                     >
-                                        <NumberInputField  />
+                                        <NumberInputField />
                                         <NumberInputStepper>
                                             <NumberIncrementStepper />
                                             <NumberDecrementStepper />
@@ -231,9 +227,9 @@ const BookingScreen = ({ navigation }) => {
                             </FormControl>
                             className="secondary"
                         </VStack>
-                        <Button className="inactive" type="submit" width="full" isLoading={isLoading} to="Menu">
-                                Submit
-                            </Button>
+                        <Button className="inactive" type="submit" width="full" isLoading={isLoading} to="checkout">
+                            Submit
+                        </Button>
                     </form>
                 </Box>
             </VStack>
