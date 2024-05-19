@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { useFormik } from 'formik';
-
+import { useNavigate } from 'react-router-dom';
 import BackHeader from '../components/backHeader';
 import Button from '../components/button';
 import SelectTime from '../components/selectTime';
@@ -27,7 +27,8 @@ import useSubmit from "../hooks/useSubmit";
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/ ; 
 
 const BookingScreen = () => {
-    const { numGuest, setNumGuest, selectedTime, setSelectedTime, selectedDate, setSelectedDate, timesList, dispatch } = useBookingContext();
+    const { numGuest, setNumGuest, selectedTime, setSelectedTime, selectedDate, setSelectedDate, timesList, dispatch, setName, setPhone,setEmail, } = useBookingContext();
+    const navigate = useNavigate();
 
     const { isLoading, response, submit } = useSubmit();
 
@@ -39,15 +40,21 @@ const BookingScreen = () => {
             phone: '',
         },
         onSubmit: (values) => {
-            console.log(values);
-            submit("", values)
+            //console.log(values);
+            submit("", values);
+            if (values) {
+                setEmail(values.email);
+                setName(values.firstName);
+                setPhone(values.phone);
+                navigate('/checkout'); // Navigate to checkout page after successful submission
+            }
         },
         validationSchema: Yup.object().shape({
             //numGuest: Yup.number().required('Number of guest?'),
             firstName: Yup.string().required('First name is required'),
             email: Yup.string().email('Invalid email address').required('Email is required'),
             //type: Yup.string().required('A type is required'),
-            phone: Yup.string().required('Your Phone number is required.').matches(phoneRegExp, 'Phone number is not valid'),
+            phone: Yup.string().required('Your Phone number is required.').min(10, 'Phone number must be at least 10 digits').matches(phoneRegExp, 'Phone number is not valid'),
         }),
     });
 
@@ -135,7 +142,7 @@ const BookingScreen = () => {
                                 />
                                 <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
                             </FormControl>
-                            <FormControl isInvalid={formik.errors.type && formik.touched.type}>
+                            <FormControl isInvalid={formik.errors.phone && formik.touched.phone}>
                                 <FormLabel htmlFor="phone">Phone</FormLabel>
                                 <Input
                                     id="phone"
@@ -143,10 +150,10 @@ const BookingScreen = () => {
                                     {...formik.getFieldProps('phone')}
                                     width='100%'
                                 />
-                                <FormErrorMessage>{formik.errors.type}</FormErrorMessage>
+                                <FormErrorMessage>{formik.errors.phone}</FormErrorMessage>
                             </FormControl>
                         </VStack>
-                        <Button className="frmBtn btn" disabled={!formik.isValid} type="button" width="full"  to="checkout">
+                        <Button className="frmBtn btn" disabled={!formik.isValid} type="button" width="full" >
                             Submit
                         </Button>
                     </form>
