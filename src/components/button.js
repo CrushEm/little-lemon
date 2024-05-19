@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PiCaretCircleLeftBold, PiCaretLeftFill } from "react-icons/pi";
 
-const Button = ({ to = "", children, className, disabled = false, ariaLabel="Click Me" }) => {
+const Button = ({ to = "", children, className, disabled = false, ariaLabel="Click Me", onSubmit = null }) => {
 
   const navigate = useNavigate();
 
@@ -10,9 +10,13 @@ const Button = ({ to = "", children, className, disabled = false, ariaLabel="Cli
     console.log(to);
     if (to === 'back') {
       navigate(-1);
+    }else if(to === 'home') {
+        navigate('/');
     } else if(to !== "") {
       navigate('/' + to);
-    }
+    }else if(onSubmit !== null){
+      onSubmit();
+    }else{}
   };
 
   return (

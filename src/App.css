@@ -32,7 +32,7 @@
 }
 
 .App {
-  text-align: center;
+  text-align: left;
 }
 .App-Contrainer {
   max-width: 880px;
@@ -170,7 +170,7 @@ button.inactive {
 .back-header h1 {
   color: var(--white);
   font-weight: 600;
-  margin-bottom: 16px;
+  font-size: 29px;
 }
 
 div.overlay {

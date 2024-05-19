@@ -1,8 +1,9 @@
 // Inside Checkout.js
 
 import React from 'react';
+import Button from '../components/button';
 
-import BackHeader from '../components/backHeader';
+import logo from '../assets/logo.png';
 
 const ConfirmScreen = () => {
 
@@ -12,10 +13,17 @@ const ConfirmScreen = () => {
 
     return (
         <>
-            <BackHeader title="Confirm Booking" />
-            <div>
-                <h2>Your Booking Has been confirmed</h2>=
+            <div className="App">
+                <header className="App-header">
+                    <img src={logo} className="" alt="logo" />
+                    <h2>Your Booking Has been confirmed</h2>
+                    <Button className="btn" to="home" width="full" >
+                        Congrats!
+                    </Button>
+
+                </header>
             </div>
+
         </>
     );
 };
