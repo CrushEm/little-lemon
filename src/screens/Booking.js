@@ -89,14 +89,15 @@ const BookingScreen = () => {
                     <form onSubmit={formik.handleSubmit}>
                         <VStack className="flex-start" spacing={4}>
                             <div className="table-input">
-                                <FormControl isInvalid={formik.errors.type && formik.touched.type}>
-                                    <FormLabel htmlFor="numGuest">Number of Guest</FormLabel>
+                                <FormControl isInvalid={formik.errors.numGuest && formik.touched.numGuest}>
+                                    <FormLabel id="numGuestLabel" htmlFor="numGuest">Number of Guest</FormLabel>
                                     <NumberInput
                                         id="numGuest"
                                         name="numGuest"
                                         min={1} max={20}
                                         onChange={handleNumGuestChange}
                                         value={numGuest}
+                                        aria-labelledby="numGuestLabel"
                                     >
                                         <NumberInputField />
                                         <NumberInputStepper>
@@ -104,17 +105,19 @@ const BookingScreen = () => {
                                             <NumberDecrementStepper />
                                         </NumberInputStepper>
                                     </NumberInput>
-                                    <FormErrorMessage>{formik.errors.type}</FormErrorMessage>
+                                    <FormErrorMessage>{formik.errors.numGuest}</FormErrorMessage>
                                 </FormControl>
                                 <FormControl>
-                                    <FormLabel htmlFor="bookingDateTime">Date and Time</FormLabel>
+                                    <FormLabel id="dateLabel" htmlFor="bookingDateTime">Date and Time</FormLabel>
                                     <Input
+                                        id="bookingDateTime"
                                         placeholder='Select Date and Time'
                                         size='md'
                                         type='date'
                                         min="2024-04-01"
                                         onChange={(e) => setSelectedDate(new Date(e.target.value))}
                                         value={selectedDate.toISOString().substr(0, 10)}
+                                        aria-labelledby="dateLabel"
                                     />
                                     <FormErrorMessage>{formik.errors.firstName}</FormErrorMessage>
                                 </FormControl>
@@ -123,37 +126,40 @@ const BookingScreen = () => {
                                 <SelectTime availableTimes={timesList} setSelectedTime={setSelectedTime} />
                             </div>
                             <FormControl isInvalid={formik.errors.firstName && formik.touched.firstName}>
-                                <FormLabel htmlFor="firstName">Name</FormLabel>
+                                <FormLabel id="nameLabel" htmlFor="firstName">Name</FormLabel>
                                 <Input
                                     id="firstName"
                                     name="firstName"
                                     {...formik.getFieldProps('firstName')}
                                     width='100%'
+                                    aria-labelledby="nameLabel"
                                 />
                                 <FormErrorMessage>{formik.errors.firstName}</FormErrorMessage>
                             </FormControl>
                             <FormControl isInvalid={formik.errors.email && formik.touched.email}>
-                                <FormLabel htmlFor="email">Email Address</FormLabel>
+                                <FormLabel id="emailLabel" htmlFor="email">Email Address</FormLabel>
                                 <Input
                                     id="email"
                                     name="email"
                                     type="email"
                                     {...formik.getFieldProps('email')}
+                                    aria-labelledby="emailLabel"
                                 />
                                 <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
                             </FormControl>
                             <FormControl isInvalid={formik.errors.phone && formik.touched.phone}>
-                                <FormLabel htmlFor="phone">Phone</FormLabel>
+                                <FormLabel id="phoneLabel" htmlFor="phone">Phone</FormLabel>
                                 <Input
                                     id="phone"
                                     name="phone"
                                     {...formik.getFieldProps('phone')}
                                     width='100%'
+                                    aria-labelledby="phoneLabel"
                                 />
                                 <FormErrorMessage>{formik.errors.phone}</FormErrorMessage>
                             </FormControl>
                         </VStack>
-                        <Button className="frmBtn btn" disabled={!formik.isValid} type="button" width="full" >
+                        <Button className="frmBtn primary" disabled={!formik.isValid} type="submit" width="full" >
                             Submit
                         </Button>
                     </form>

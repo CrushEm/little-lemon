@@ -38,24 +38,22 @@ const CheckoutScreen = () => {
     return (
         <>
             <BackHeader title="Confirm Booking" />
-            <div className="App left">
-
-
-                    <div>
-                        <h2>Confirm Booking</h2>
-                        <p>Name: {name}</p>
+            <div className="App left p20 center">
+                    <div class="confirm-details">
+                        <h2>Confirm this Booking</h2>
+                        <h3>POC</h3>
+                        <p> {name}</p>
                         <p>Phone: {phone}</p>
                         <p>Email: {email}</p>
-                        <p>Number of Guests: {numGuest}</p>
-                        <p>Selected Time: {selectedTime}</p>
-                        <p>Selected Date: {selectedDate.toISOString().substr(0, 10)}</p>
+                        <h3>Details</h3>
+                        <p>Guests: {numGuest}</p>
+                        <p>Time: {selectedTime}</p>
+                        <p>Date: {selectedDate.toISOString().substr(0, 10)}</p>
                     </div>
-                    <Button className="frmBtn btn" onSubmit={submitForm} width="full" >
-                        Submit
+                    <Button className="frmBtn primary pt20" onSubmit={submitForm} width="full" >
+                        Confirm
                     </Button>
-  
             </div>
-
         </>
     );
 };

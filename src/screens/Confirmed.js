@@ -16,9 +16,9 @@ const ConfirmScreen = () => {
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="" alt="logo" />
-                    <h2>Your Booking Has been confirmed</h2>
-                    <Button className="btn" to="home" width="full" >
-                        Congrats!
+                    <p>Your Booking Has been confirmed</p>
+                    <Button className="frmBtn secondary btn" to="home" width="full" >
+                        See you soon!
                     </Button>
 
                 </header>
