@@ -24,8 +24,10 @@ import {
 import * as Yup from 'yup';
 import useSubmit from "../hooks/useSubmit";
 
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/ ; 
+
 const BookingScreen = () => {
-    const { numGuest, setNumGuest, selectedTime, setSelectedTime, selectedDate, setSelectedDate, timesList, setTimeList } = useBookingContext();
+    const { numGuest, setNumGuest, selectedTime, setSelectedTime, selectedDate, setSelectedDate, timesList, dispatch } = useBookingContext();
 
     const { isLoading, response, submit } = useSubmit();
 
@@ -33,18 +35,19 @@ const BookingScreen = () => {
         initialValues: {
             firstName: '',
             email: '',
-            type: '',
-            comment: '',
+            //type: '',
+            phone: '',
         },
         onSubmit: (values) => {
+            console.log(values);
             submit("", values)
         },
         validationSchema: Yup.object().shape({
-            numGuest: Yup.number().required('Number of guest?'),
+            //numGuest: Yup.number().required('Number of guest?'),
             firstName: Yup.string().required('First name is required'),
             email: Yup.string().email('Invalid email address').required('Email is required'),
-            type: Yup.string().required('A type is required'),
-            comment: Yup.string().required('a comment is required').min(25, "Must be at least 25 characters"),
+            //type: Yup.string().required('A type is required'),
+            phone: Yup.string().required('Your Phone number is required.').matches(phoneRegExp, 'Phone number is not valid'),
         }),
     });
 
@@ -57,6 +60,11 @@ const BookingScreen = () => {
     // useEffect(() => {
     //     //console.log(numGuest);
     // }, [numGuest]);
+
+    useEffect(()=>{
+        console.log(selectedDate);
+        dispatch({ type: 'UPDATE_TIMES', payload: selectedDate });
+    }, [selectedDate, dispatch])
 
     useEffect(() => {
         console.log(selectedTime);
@@ -128,7 +136,7 @@ const BookingScreen = () => {
                                 <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
                             </FormControl>
                             <FormControl isInvalid={formik.errors.type && formik.touched.type}>
-                                <FormLabel htmlFor="firstName">Phone</FormLabel>
+                                <FormLabel htmlFor="phone">Phone</FormLabel>
                                 <Input
                                     id="phone"
                                     name="phone"
@@ -138,7 +146,7 @@ const BookingScreen = () => {
                                 <FormErrorMessage>{formik.errors.type}</FormErrorMessage>
                             </FormControl>
                         </VStack>
-                        <Button className="inactive" type="submit" width="full" isLoading={isLoading} to="checkout">
+                        <Button className="frmBtn btn" disabled={!formik.isValid} type="button" width="full"  to="checkout">
                             Submit
                         </Button>
                     </form>

@@ -40,7 +40,7 @@ const timesReducer = (state, action) => {
 };
 
 const BookingProvider = ({ children }) => {
-    const [timesList, setTimeList] = useReducer(timesReducer, availableTimes);
+    const [timesList, dispatch] = useReducer(timesReducer, availableTimes);
     const [selectedTime, setSelectedTime] = useState(getCurrentTime());
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [numGuest, setNumGuest] = useState('2');
@@ -56,7 +56,7 @@ const BookingProvider = ({ children }) => {
     }
 
     return (
-        <BookingContext.Provider value={{ numGuest, setNumGuest, selectedTime, setSelectedTime, selectedDate, setSelectedDate, timesList, setTimeList }}>
+        <BookingContext.Provider value={{ numGuest, setNumGuest, selectedTime, setSelectedTime, selectedDate, setSelectedDate, timesList, dispatch }}>
             {children}
         </BookingContext.Provider>
     );

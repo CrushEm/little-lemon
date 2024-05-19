@@ -35,6 +35,7 @@ const SelectTime = ({ setSelectedTime, availableTimes }) => {
                             key={index}
                             onClick={() => handleTimeClick(time)}
                             className={`time-select ${timeCompare(time, selectedTime) ? 'active' : ''}`}
+                            type="button"
                         >
                             {time}
                         </Box>
