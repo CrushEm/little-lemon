@@ -153,11 +153,15 @@ button.inactive {
     var(--white),
     var(--gray)
   );
-  /* border: var(--gray-dark);
-  border-width: 1px;
-  border-style: solid; */
 }
 
+button.inactive:hover {
+  background-image: linear-gradient(
+    to left,
+    var(--gray),
+    var(--white),
+  );
+}
 
 
 .back-header {
